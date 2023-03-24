@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio 1</title>
+</head>
+<body>
+    <main>
+        <h2>Programa Situação da Turma</h2>
+        <hr>
+
+        <section>
+            <label for="">Nome Aluno(a)</label>
+            <input id="inNome" type="text"><br><br>
+
+            <label for="">1º Nota</label>
+            <input id="inNota1" type=""><br><br>
+
+            <label for="">2º Nota</label>
+            <input id="inNota2" type="text"><br><br>
+
+            <button id="mediaAluno">Exibir média do aluno</button>
+            <button id="mediaTurma">Exibir média da turma</button>
+        </section>
+
+        <article>
+            <p id="outMedia"></p>
+            <p id="outNome"></p>
+            <p id="outMediat"></p>
+        </article>
+    </main>
+
+    <script>
+
+        let media1 = document.getElementById('mediaAluno')
+        let mediaT = []; 
+
+        media1.addEventListener('click', ()=> {
+
+            let nome = document.getElementById('inNome').value
+            let nota1 = parseFloat(document.getElementById('inNota1').value)
+            let nota2 = parseFloat (document.getElementById('inNota2').value)
+
+            media1 = (nota1 + nota2) / 2
+            mediaT.push(media1)
+            //console.log(media1)
+
+
+            let regex = /^\d+$/
+    let test1 = regex.test(nota1)
+    let test2 = regex.test(nota2)
+
+
+   
+    if(test1 != true || test2 != true){
+        alert('O campo de notas só aceita números, por favor reinicie a página e redigite suas notas.')    
+    }
+
+    else{
+            if(nota1 > 10 || nota2 > 10){
+                alert("A nota digitada é inválida, por favor reinicie a página e redigite suas notas.")
+
+            }else if(media1 >= 7 ){
+                outMedia.textContent = `Média das notas ${media1}`
+                outNome.textContent = `Parabéns ${nome}! Você foi aprovado(a)!`
+                outNome.style.color = 'blue'
+            
+            }else if(media1 <= 7 && media1 >= 3){
+                outMedia.textContent = `Média das notas ${media1}`
+                outNome.textContent = `Atenção ${nome}, você está de recuperação!`
+                outNome.style.color = 'green'
+            
+            }else{
+                outMedia.textContent = `Média das notas ${media1}`
+                outNome.textContent = `Ops ${nome}, você foi reprovado.`
+                outNome.style.color = 'red'
+            }
+        }
+        })
+
+        let media2 = document.getElementById('mediaTurma')
+        mediaTurma.addEventListener('click', ()=> {
+
+        
+             
+            
+
+         
+            let soma = 0
+                for(var i = 0; i < mediaT.length; i++){
+                    soma += mediaT[i] / mediaT.length;
+                }
+                outMediat.textContent = `A média da turma é ${soma}`
+
+        })
+
+        
+    </script>
+</body>
+</html>
